@@ -1,0 +1,29 @@
+b = imread('cameraman.tif');
+b2 = imdivide(b, 64);
+bb2 = immultiply(b2, 64);
+b3 = imdivide(b, 32);
+bb3 = immultiply(b2, 32);
+b4 = imdivide(b, 16);
+bb4 = immultiply(b2, 16);
+
+
+f1 = fspecial('unsharp');
+cf1 = filter2(f1,b);
+
+
+T = [12 6 5 13 14 14 16 15; 
+     11 10 8 5 8 1 14 14; 
+     9 8 3 4 7 12 18 19; 
+     10 7 4 2 10 12 13 17;
+     16 9 13 13 16 19 19 17;
+     12 10 14 15 18 18 16 14;
+     11 8 10 12 14 13 14 15;
+     8 6 3 7 9 11 12 12;];
+
+
+subplot(231), imshow(bb2), title('64');
+subplot(232), imshow(bb3), title('32');
+subplot(233), imshow(bb4), title('16');
+subplot(234), imshow(cf1), title('filter');
+subplot(235), imhist(T), title('hist');
+subplot(236), imhist(T), axis tight, title('hist');
